@@ -85,7 +85,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
           y: this.yScale(cell.name),
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
-          fill: this.colors.getColor(value, row),
+          fill: this.colors.getColor(value, row, row.name),
           data: value,
           label: formatLabel(cell.name),
           series: row.name

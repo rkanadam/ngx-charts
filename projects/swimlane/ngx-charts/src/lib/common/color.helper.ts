@@ -60,7 +60,7 @@ export class ColorHelper {
       return this.scale(valueScale(value));
     } else {
       if (typeof this.customColors === 'function') {
-        return this.customColors(value, point);
+        return this.customColors(value, point, seriesName);
       }
 
       const formattedValue = value.toString();

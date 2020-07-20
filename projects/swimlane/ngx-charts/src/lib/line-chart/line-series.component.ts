@@ -105,10 +105,10 @@ export class LineSeriesComponent implements OnChanges {
       const max = Math.max(...values);
       const min = Math.min(...values);
       if (max === min) {
-        this.stroke = this.colors.getColor(max, this.data);
+        this.stroke = this.colors.getColor(max, this.data, this.data.name);
       }
     } else {
-      this.stroke = this.colors.getColor(this.data.name, this.data);
+      this.stroke = this.colors.getColor(this.data.name, this.data, this.data.name);
     }
   }
 

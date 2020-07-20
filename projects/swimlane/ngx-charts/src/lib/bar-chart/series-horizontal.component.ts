@@ -178,13 +178,13 @@ export class SeriesHorizontal implements OnChanges {
       }
 
       if (this.colors.scaleType === 'ordinal') {
-        bar.color = this.colors.getColor(label, d);
+        bar.color = this.colors.getColor(label, d, this.seriesName);
       } else {
         if (this.type === 'standard') {
-          bar.color = this.colors.getColor(value, d);
+          bar.color = this.colors.getColor(value, d, this.seriesName);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
-          bar.color = this.colors.getColor(bar.offset1, d);
+          bar.color = this.colors.getColor(bar.offset1, d, this.seriesName);
           bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
         }
       }
