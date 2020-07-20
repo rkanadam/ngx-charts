@@ -146,13 +146,13 @@ export class ComboSeriesVerticalComponent implements OnChanges {
       }
 
       if (this.colors.scaleType === 'ordinal') {
-        bar.color = this.colors.getColor(label);
+        bar.color = this.colors.getColor(label, bar);
       } else {
         if (this.type === 'standard') {
-          bar.color = this.colors.getColor(value);
+          bar.color = this.colors.getColor(value, bar);
           bar.gradientStops = this.colors.getLinearGradientStops(value);
         } else {
-          bar.color = this.colors.getColor(bar.offset1);
+          bar.color = this.colors.getColor(bar.offset1, bar);
           bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
         }
       }

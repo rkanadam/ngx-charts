@@ -50,7 +50,7 @@ export class ColorHelper {
     return colorScale;
   }
 
-  getColor(value) {
+  getColor(value, point?: any, seriesName?: string) {
     if (value === undefined || value === null) {
       throw new Error('Value can not be null');
     }
@@ -60,7 +60,7 @@ export class ColorHelper {
       return this.scale(valueScale(value));
     } else {
       if (typeof this.customColors === 'function') {
-        return this.customColors(value);
+        return this.customColors(value, point);
       }
 
       const formattedValue = value.toString();

@@ -120,7 +120,7 @@ export class CardSeriesComponent implements OnChanges {
       }
 
       const value = d.data.value;
-      const valueColor = label ? this.colors.getColor(label) : this.emptyColor;
+      const valueColor = label ? this.colors.getColor(label, d.data) : this.emptyColor;
       const color = this.cardColor || valueColor || '#000';
       return {
         x: d.x,

@@ -115,7 +115,7 @@ export class PolarSeriesComponent implements OnChanges {
     const seriesName = this.data.name;
     const linearScaleType = this.colors.scaleType === 'linear';
     const min = this.yScale.domain()[0];
-    this.seriesColor = this.colors.getColor(linearScaleType ? min : seriesName);
+    this.seriesColor = this.colors.getColor(linearScaleType ? min : seriesName, data, seriesName);
 
     this.path = line(data) || '';
 
@@ -124,7 +124,7 @@ export class PolarSeriesComponent implements OnChanges {
       const r = this.getRadius(d);
       const value = d.value;
 
-      const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
+      const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName, d, seriesName);
 
       const cData = Object.assign({}, d, {
         series: seriesName,

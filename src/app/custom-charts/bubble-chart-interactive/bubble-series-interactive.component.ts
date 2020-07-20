@@ -103,7 +103,7 @@ export class BubbleSeriesInteractiveComponent implements OnChanges {
           const cx = this.xScaleType === 'linear' ? this.xScale(Number(x)) : this.xScale(x);
           const cy = this.yScaleType === 'linear' ? this.yScale(Number(y)) : this.yScale(y);
 
-          const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r) : this.colors.getColor(seriesName);
+          const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r, d, seriesName) : this.colors.getColor(seriesName, d, seriesName);
 
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;
