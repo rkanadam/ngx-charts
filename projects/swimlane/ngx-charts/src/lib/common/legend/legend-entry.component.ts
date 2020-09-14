@@ -3,7 +3,7 @@ import { Component, Input, Output, ChangeDetectionStrategy, HostListener, EventE
 @Component({
   selector: 'ngx-charts-legend-entry',
   template: `
-    <span [title]="formattedLabel" tabindex="-1" [class.active]="isActive" (click)="select.emit(formattedLabel)">
+    <span [title]="formattedLabel" tabindex="-1" [class.active]="isActive" [class.inactive]="isInactive" (click)="select.emit(formattedLabel)">
       <span class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </span>
       <span class="legend-label-text">
         {{ trimmedLabel }}
@@ -17,6 +17,7 @@ export class LegendEntryComponent {
   @Input() label: any;
   @Input() formattedLabel: string;
   @Input() isActive: boolean = false;
+  @Input() isInactive: boolean = false;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();

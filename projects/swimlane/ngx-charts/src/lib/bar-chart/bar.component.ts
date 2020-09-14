@@ -28,6 +28,7 @@ import { transition } from 'd3-transition';
       role="img"
       tabIndex="-1"
       [class.active]="isActive"
+      [class.inactive]="isInactive"
       [class.hidden]="hideBar"
       [attr.d]="path"
       [attr.aria-label]="ariaLabel"
@@ -49,6 +50,7 @@ export class BarComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() offset = 0;
   @Input() isActive: boolean = false;
+  @Input() isInactive: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
   @Input() ariaLabel: string;

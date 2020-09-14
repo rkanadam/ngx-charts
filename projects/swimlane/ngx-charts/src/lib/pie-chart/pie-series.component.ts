@@ -44,6 +44,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
         [max]="max"
         [explodeSlices]="explodeSlices"
         [isActive]="isActive(arc.data)"
+        [isInactive]="isInactive(arc.data)"
         [animate]="animations"
         (select)="onClick($event)"
         (activate)="activate.emit($event)"
@@ -202,4 +203,13 @@ export class PieSeriesComponent implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 }

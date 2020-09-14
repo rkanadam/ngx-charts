@@ -26,6 +26,7 @@ import { formatLabel, escapeLabel } from '../common/label.helper';
           [fill]="circle.color"
           [style.opacity]="circle.opacity"
           [class.active]="circle.isActive"
+          [class.inactive]="circle.isInactive"
           [pointerEvents]="'all'"
           [data]="circle.value"
           [classNames]="circle.classNames"
@@ -105,6 +106,7 @@ export class BubbleSeriesComponent implements OnChanges {
           const color = this.colors.scaleType === 'linear' ? this.colors.getColor(r, d, seriesName) : this.colors.getColor(seriesName, d, seriesName);
 
           const isActive = !this.activeEntries.length ? true : this.isActive({ name: seriesName });
+          const isInactive = !this.activeEntries || !this.activeEntries.length ? false : this.isInactive({ name: seriesName });
           const opacity = isActive ? 1 : 0.3;
 
           const data = Object.assign({}, d, {
@@ -131,6 +133,7 @@ export class BubbleSeriesComponent implements OnChanges {
             opacity,
             seriesName,
             isActive,
+            isInactive,
             transform: `translate(${cx},${cy})`
           };
         }
@@ -178,6 +181,15 @@ export class BubbleSeriesComponent implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {

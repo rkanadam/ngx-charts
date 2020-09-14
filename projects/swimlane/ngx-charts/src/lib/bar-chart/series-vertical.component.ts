@@ -28,6 +28,7 @@ export enum D0Types {
       [gradient]="gradient"
       [ariaLabel]="bar.ariaLabel"
       [isActive]="isActive(bar.data)"
+      [isInactive]="isInactive(bar.data)"
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
@@ -258,6 +259,15 @@ export class SeriesVerticalComponent implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   onClick(data: DataItem): void {
     this.select.emit(data);

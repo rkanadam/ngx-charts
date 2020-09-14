@@ -1,17 +1,17 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
   TemplateRef
 } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
-import { formatLabel, escapeLabel } from '../common/label.helper';
-import { D0Types } from './series-vertical.component';
-import { DataItem } from '../models/chart-data.model';
+import {animate, style, transition, trigger} from '@angular/animations';
+import {escapeLabel, formatLabel} from '../common/label.helper';
+import {D0Types} from './series-vertical.component';
+import {DataItem} from '../models/chart-data.model';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
@@ -32,6 +32,7 @@ import { DataItem } from '../models/chart-data.model';
       (select)="click($event)"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
+      [isInactive]="isInactive(bar.data)"
       [ariaLabel]="bar.ariaLabel"
       [animations]="animations"
       (activate)="activate.emit($event)"
@@ -67,7 +68,7 @@ import { DataItem } from '../models/chart-data.model';
         style({
           opacity: 1
         }),
-        animate(500, style({ opacity: 0 }))
+        animate(500, style({opacity: 0}))
       ])
     ])
   ]
@@ -254,6 +255,15 @@ export class SeriesHorizontal implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   getLabel(dataItem): string {
     if (dataItem.label) {

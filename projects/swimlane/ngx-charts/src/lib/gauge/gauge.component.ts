@@ -39,6 +39,7 @@ import { ColorHelper } from '../common/color.helper';
             [cornerRadius]="cornerRadius"
             [colors]="colors"
             [isActive]="isActive(arc.valueArc.data)"
+            [isInactive]="isInactive(arc.valueArc.data)"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
             [valueFormatting]="valueFormatting"
@@ -341,6 +342,15 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   trackBy(index, item): string {
     return item.valueArc.data.name;

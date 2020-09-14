@@ -26,6 +26,7 @@ import { formatLabel } from '../label.helper';
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
               [isActive]="isActive(entry)"
+              [isInactive]="isActive(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)"
@@ -95,6 +96,15 @@ export class LegendComponent implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   activate(item) {
     this.labelActivate.emit(item);

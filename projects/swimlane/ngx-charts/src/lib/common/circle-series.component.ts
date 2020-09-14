@@ -44,6 +44,7 @@ import { ColorHelper } from '../common/color.helper';
         [r]="circle.radius"
         [fill]="circle.color"
         [class.active]="isActive({ name: circle.seriesName })"
+        [class.inactive]="isInactive({ name: circle.seriesName })"
         [pointerEvents]="circle.value === 0 ? 'none' : 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
@@ -235,6 +236,15 @@ export class CircleSeriesComponent implements OnChanges, OnInit {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   activateCircle(): void {
     this.barVisible = true;

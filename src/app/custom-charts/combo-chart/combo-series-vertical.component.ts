@@ -21,6 +21,7 @@ import { formatLabel } from '@swimlane/ngx-charts/common/label.helper';
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
+      [isInactive]="isInactive(bar.data)"
       [animations]="animations"
       [noBarWhenZero]="noBarWhenZero"
       (select)="onClick($event)"
@@ -184,6 +185,15 @@ export class ComboSeriesVerticalComponent implements OnChanges {
     });
     return item !== undefined;
   }
+
+  isInactive(entry): boolean {
+    if (!this.activeEntries || this.activeEntries.length === 0) return false;
+    const item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
+  }
+
 
   onClick(data): void {
     this.select.emit(data);
